@@ -34,7 +34,7 @@ class _HomeState extends State<Home> {
                       nextPage();
                       setState(() {});
                     },
-                    child: Text("logOut")),
+                    child: const Text("logOut")),
               ],
             )
           ]),
