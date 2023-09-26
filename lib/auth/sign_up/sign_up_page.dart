@@ -89,10 +89,10 @@ class _SignUpPageState extends State<SignUpPage> {
                       },
                     ),
                     ElevatedButton(
-                        onPressed: () {
+                        onPressed: () async {
                           if (_formkey.currentState!.validate()) {
                             _formkey.currentState!.save();
-                            createUserWithEmailAndPassword(email, password);
+                           await createUserWithEmailAndPassword(email, password);
                             printValut();
                           }
                         },
