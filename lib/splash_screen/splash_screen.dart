@@ -51,41 +51,55 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image(
-                image: AssetImage("assets/images/download.jpg"),
-                width: 300,
-              ),
-              Text(
-                "The LionKing",
-                style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-              )
+    return Scaffold(
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            // Where the linear gradient begins and ends
+            begin: Alignment.topRight,
+            end: Alignment.bottomLeft,
+            // Add one stop for each color. Stops should increase from 0 to 1
+            stops: [0.1, 0.5, 0.7, 0.9],
+            colors: [
+              // Colors are easy thanks to Flutter's Colors class.
+              Colors.deepPurpleAccent,
+              Colors.deepOrange,
+              Colors.white,
+              Colors.blueAccent,
             ],
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SpinKitFadingCircle(
-                color: Colors.black,
-                size: 50.0,
-              )
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [Text("created by vishwanath")],
-          )
-        ],
+        ),
+        child: const Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image(
+                  image: AssetImage("assets/images/download.jpg"),
+                  width: 300,
+                ),
+                Text(
+                  "The LionKing",
+                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                )
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SpinKitFadingCircle(
+                  color: Colors.black,
+                  size: 50.0,
+                )
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [Text("created by vishwanath")],
+            )
+          ],
+        ),
       ),
     );
   }
