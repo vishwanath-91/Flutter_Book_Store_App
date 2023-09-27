@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_firebase_auth/auth/sign_in/sign_in_page.dart';
 import 'package:flutter_firebase_auth/auth/sign_up/sign_up_function.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -53,8 +54,8 @@ class _SignUpPageState extends State<SignUpPage> {
                     ),
                     TextFormField(
                       key: const ValueKey("email"),
-                      decoration: const InputDecoration(
-                          hintText: "Enter your Email Here"),
+                      decoration:
+                          const InputDecoration(hintText: "Enter your Email"),
                       validator: (value) {
                         if (value.toString().isEmpty) {
                           return "email should not be empty";
@@ -73,7 +74,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       obscureText: true,
                       key: const ValueKey("password"),
                       decoration: const InputDecoration(
-                          hintText: "Enter your password Here"),
+                          hintText: "Enter your password"),
                       validator: (value) {
                         if (value.toString().isEmpty) {
                           return "password should not be empty";
@@ -92,11 +93,31 @@ class _SignUpPageState extends State<SignUpPage> {
                         onPressed: () async {
                           if (_formkey.currentState!.validate()) {
                             _formkey.currentState!.save();
-                           await createUserWithEmailAndPassword(email, password);
+                            await createUserWithEmailAndPassword(
+                                email, password);
                             printValut();
                           }
                         },
-                        child: const Text("SignUp"))
+                        child: const Text("SignUp")),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text("Allready SignIn Account?"),
+                        InkWell(
+                          onTap: () {
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const SignInPage(),
+                                ));
+                          },
+                          child: const Text(
+                            "SignIn",
+                            style: TextStyle(color: Colors.blueAccent),
+                          ),
+                        )
+                      ],
+                    )
                   ],
                 )),
           )

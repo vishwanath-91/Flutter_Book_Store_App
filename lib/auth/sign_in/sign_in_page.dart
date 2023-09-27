@@ -1,22 +1,23 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_firebase_auth/auth/sign_in/sign_in_function.dart';
+import 'package:flutter_firebase_auth/auth/sign_up/sign_up_page.dart';
 import 'package:flutter_firebase_auth/home_page/home_pages.dart';
 
-class SignIpPage extends StatefulWidget {
-  const SignIpPage({super.key});
+class SignInPage extends StatefulWidget {
+  const SignInPage({super.key});
 
   @override
-  State<SignIpPage> createState() => _SignIpPageState();
+  State<SignInPage> createState() => _SignInPageState();
 }
 
-class _SignIpPageState extends State<SignIpPage> {
-  final _formkey = GlobalKey<FormState>();
+class _SignInPageState extends State<SignInPage> {
+  final _formKey = GlobalKey<FormState>();
 
   String email = "";
   String password = "";
 
-  printValut() {
+  printValue() {
     print(email);
     print(password);
   }
@@ -42,13 +43,13 @@ class _SignIpPageState extends State<SignIpPage> {
           Container(
             margin: const EdgeInsets.all(30),
             child: Form(
-                key: _formkey,
+                key: _formKey,
                 child: Column(
                   children: [
                     TextFormField(
                       key: const ValueKey("email"),
-                      decoration: const InputDecoration(
-                          hintText: "Enter your Email Here"),
+                      decoration:
+                          const InputDecoration(hintText: "Enter your Email"),
                       validator: (value) {
                         if (value.toString().isEmpty) {
                           return "email should not be empty";
@@ -67,7 +68,7 @@ class _SignIpPageState extends State<SignIpPage> {
                       obscureText: true,
                       key: const ValueKey("password"),
                       decoration: const InputDecoration(
-                          hintText: "Enter your password Here"),
+                          hintText: "Enter your password"),
                       validator: (value) {
                         if (value.toString().isEmpty) {
                           return "password should not be empty";
@@ -84,14 +85,33 @@ class _SignIpPageState extends State<SignIpPage> {
                     ),
                     ElevatedButton(
                         onPressed: () async {
-                          if (_formkey.currentState!.validate()) {
-                            _formkey.currentState!.save();
+                          if (_formKey.currentState!.validate()) {
+                            _formKey.currentState!.save();
                             await signInWithEmailAndPassword(email, password);
                           }
-                          printValut();
+                          printValue();
                           goToNextPage();
                         },
-                        child: const Text("SignIn"))
+                        child: const Text("SignIn")),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text("Don't have an account?"),
+                        InkWell(
+                          onTap: () {
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const SignUpPage(),
+                                ));
+                          },
+                          child: const Text(
+                            "SignUp",
+                            style: TextStyle(color: Colors.blueAccent),
+                          ),
+                        )
+                      ],
+                    )
                   ],
                 )),
           )

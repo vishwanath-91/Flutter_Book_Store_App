@@ -1,7 +1,13 @@
+import 'dart:async';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_firebase_auth/auth/sign_in/sign_in_page.dart';
+import 'package:flutter_firebase_auth/home_page/home_pages.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class SplashScreen extends StatefulWidget {
-  const SplashScreen({super.key});
+  const SplashScreen({Key? key}) : super(key: key);
 
   @override
   State<SplashScreen> createState() => _SplashScreenState();
@@ -9,35 +15,78 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   @override
+  void initState() {
+    super.initState();
+    goToNextPage();
+  }
+
+  Future<void> goToNextPage() async {
+    if (mounted) {
+      Timer(const Duration(seconds: 3), () async {
+        if (mounted) {
+          if (FirebaseAuth.instance.currentUser != null) {
+            await Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const Home(),
+              ),
+            );
+          } else {
+            await Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const SignInPage(),
+              ),
+            );
+          }
+        }
+      });
+    }
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image(
-              image: AssetImage("assets/images/download.jpg"),
-              width: 300,
-            )
-          ],
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              "The LionKing",
-              style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-            )
-          ],
-        ),
-        Row(
-          children: [],
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [Text("created by vishwanath")],
-        )
-      ]),
+    return const Scaffold(
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image(
+                image: AssetImage("assets/images/download.jpg"),
+                width: 300,
+              ),
+              Text(
+                "The LionKing",
+                style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+              )
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SpinKitFadingCircle(
+                color: Colors.black,
+                size: 50.0,
+              )
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [Text("created by vishwanath")],
+          )
+        ],
+      ),
     );
   }
 }

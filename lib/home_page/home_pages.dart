@@ -14,7 +14,7 @@ class _HomeState extends State<Home> {
     await Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => const SignIpPage(),
+          builder: (context) => const SignInPage(),
         ));
   }
 
