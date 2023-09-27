@@ -102,7 +102,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text("Allready SignIn Account?"),
+                        const Text("Allready SignIn Account?"),
                         InkWell(
                           onTap: () {
                             Navigator.pushReplacement(

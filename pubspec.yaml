@@ -38,6 +38,11 @@ dependencies:
   firebase_core: ^2.16.0
   firebase_auth: ^4.10.0
   flutter_spinkit: ^5.2.0
+  google_fonts: ^6.1.0
+  fluttertoast: ^8.2.2
+  snackbar: ^1.0.2
+  animated_text_kit: ^4.2.2
+  image_picker: ^1.0.4
 
 dev_dependencies:
   flutter_test:
