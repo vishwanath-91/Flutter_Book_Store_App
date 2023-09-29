@@ -27,7 +27,7 @@ class _SignInPageState extends State<SignInPage> {
       await Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => const Home(),
+            builder: (context) => const HomePage(),
           ));
     }
   }
@@ -68,11 +68,7 @@ class _SignInPageState extends State<SignInPage> {
                   child: Container(
                 height: 200,
                 width: MediaQuery.of(context).size.width,
-                decoration: const BoxDecoration(
-                    gradient: LinearGradient(
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                        colors: [])),
+                decoration: const BoxDecoration(),
               )),
               Positioned(
                   left: 45,

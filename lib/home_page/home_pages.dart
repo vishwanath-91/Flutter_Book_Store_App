@@ -1,19 +1,19 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_firebase_auth/home_page/rich_text.dart';
 
 import '../auth/sign_in/sign_in_page.dart';
-import 'animated_text_widget.dart';
+import '../firebase_database/book_add/book_add_page.dart';
+import 'home.dart';
 import 'list_view_builder.dart';
 
-class Home extends StatefulWidget {
-  const Home({super.key});
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
 
   @override
-  State<Home> createState() => _HomeState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _HomeState extends State<Home> {
+class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
 
   PageController pageController = PageController();
@@ -40,30 +40,28 @@ class _HomeState extends State<Home> {
       drawer: Drawer(
         child: ListView(children: [
           const DrawerHeader(
-              child: Flexible(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                CircleAvatar(
-                  radius: 40,
-                  backgroundImage: NetworkImage(
-                      "https://images.ctfassets.net/vztl6s0hp3ro/2Zg9Mth4qC5EGGWHoJIy9T/3f0dbdf8884231a3e9e7998c514cc1fa/Unleash-employee-potential-with-personal-professional-development-examples.jpg"),
+              child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              CircleAvatar(
+                radius: 40,
+                backgroundImage: NetworkImage(
+                    "https://images.ctfassets.net/vztl6s0hp3ro/2Zg9Mth4qC5EGGWHoJIy9T/3f0dbdf8884231a3e9e7998c514cc1fa/Unleash-employee-potential-with-personal-professional-development-examples.jpg"),
+              ),
+              SizedBox(
+                width: 5,
+              ),
+              Flexible(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text("vishwanath nishad"),
+                    Text("om.vishwanath.91@gmail.com")
+                  ],
                 ),
-                SizedBox(
-                  width: 5,
-                ),
-                Flexible(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text("vishwanath nishad"),
-                      Text("om.vishwanath.91@gmail.com")
-                    ],
-                  ),
-                )
-              ],
-            ),
+              )
+            ],
           )),
           const ListTile(
             leading: Icon(Icons.folder),
@@ -107,11 +105,7 @@ class _HomeState extends State<Home> {
       ///////////////////////
       body: PageView(
         controller: pageController,
-        children: const [
-          RichFont(),
-          ListViewBuilder(),
-          AnimatedWidgetText(),
-        ],
+        children: const [Home(), BookAdd(), ListViewBuilder()],
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
@@ -120,8 +114,8 @@ class _HomeState extends State<Home> {
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.business),
-            label: 'Business',
+            icon: Icon(Icons.add),
+            label: 'Book Add',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.school),
