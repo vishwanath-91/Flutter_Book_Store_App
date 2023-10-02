@@ -12,11 +12,11 @@ Future<void> create(
   int quantity,
 ) async {
   await FirebaseFirestore.instance.collection(category).doc(bookId).set({
-    'referencerNumber': referencerNumber,
-    'Title': title,
-    'Author': author, // Corrected 'author' to 'Author'
-    'Publisher': publisher,
-    'Edition': edition,
+    'referencerNumber': referencerNumber.toUpperCase(),
+    'Title': title.toUpperCase(),
+    'Author': author.toLowerCase(), // Corrected 'author' to 'Author'
+    'Publisher': publisher.toUpperCase(),
+    'Edition': edition.toUpperCase(),
     'CoverType': coverType,
     'Quantity': quantity,
   });

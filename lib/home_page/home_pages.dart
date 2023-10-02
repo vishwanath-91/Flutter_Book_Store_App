@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 
 import '../auth/sign_in/sign_in_page.dart';
 import '../firebase_database/book_add/book_add_page.dart';
+import '../firebase_database/book_search/book_search.dart';
 import 'home.dart';
-import 'list_view_builder.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  const HomePage({Key? key});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -25,12 +25,13 @@ class _HomePageState extends State<HomePage> {
     pageController.jumpToPage(index);
   }
 
-  goToNextPage() async {
+  Future<void> goToNextPage() async {
     await Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const SignInPage(),
-        ));
+      context,
+      MaterialPageRoute(
+        builder: (context) => const SignInPage(),
+      ),
+    );
   }
 
   @override
@@ -40,29 +41,30 @@ class _HomePageState extends State<HomePage> {
       drawer: Drawer(
         child: ListView(children: [
           const DrawerHeader(
-              child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              CircleAvatar(
-                radius: 40,
-                backgroundImage: NetworkImage(
-                    "https://images.ctfassets.net/vztl6s0hp3ro/2Zg9Mth4qC5EGGWHoJIy9T/3f0dbdf8884231a3e9e7998c514cc1fa/Unleash-employee-potential-with-personal-professional-development-examples.jpg"),
-              ),
-              SizedBox(
-                width: 5,
-              ),
-              Flexible(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text("vishwanath nishad"),
-                    Text("om.vishwanath.91@gmail.com")
-                  ],
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                CircleAvatar(
+                  radius: 40,
+                  backgroundImage: NetworkImage(
+                      "https://images.ctfassets.net/vztl6s0hp3ro/2Zg9Mth4qC5EGGWHoJIy9T/3f0dbdf8884231a3e9e7998c514cc1fa/Unleash-employee-potential-with-personal-professional-development-examples.jpg"),
                 ),
-              )
-            ],
-          )),
+                SizedBox(
+                  width: 5,
+                ),
+                Flexible(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("vishwanath nishad"),
+                      Text("om.vishwanath.91@gmail.com")
+                    ],
+                  ),
+                )
+              ],
+            ),
+          ),
           const ListTile(
             leading: Icon(Icons.folder),
             title: Text("My Folder"),
@@ -100,12 +102,9 @@ class _HomePageState extends State<HomePage> {
           ),
         ]),
       ),
-      /*drware part end heare*/
-      ////////////////////////
-      ///////////////////////
       body: PageView(
         controller: pageController,
-        children: const [Home(), BookAdd(), ListViewBuilder()],
+        children: const [Home(), BookAdd(), BookSearch()],
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
@@ -118,8 +117,8 @@ class _HomePageState extends State<HomePage> {
             label: 'Book Add',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.school),
-            label: 'School',
+            icon: Icon(Icons.search),
+            label: 'Search',
           ),
         ],
         currentIndex: _selectedIndex,
